@@ -1,0 +1,46 @@
+{% extends 'currency/base.html' %}
+
+{% block heading %}
+    <title>Exchange Rate App</title>
+
+{% endblock heading %}
+
+
+{% block content %}
+    <h1></h1>
+    <div class="wrapper">
+      <header>Currency Converter</header>
+
+      <form  method="POST">
+        {% csrf_token %}
+        <div class="amount">
+          <p>Enter Amount</p>
+          <input name="sum" value="1">
+        </div>
+        <div class="drop-list">
+          <div class="from">
+            <p>From</p>
+            <div class="select-box">
+                <select name="currency_from">
+                    {% for currency in data %}
+                        <option id="option" value="{{ currency.currency_code }}">{{currency.country}}</option>
+                    {% endfor %}
+                  </select>            
+                </div>
+          </div>
+          <div class="to">
+            <p>To</p>
+            <div class="select-box">
+              <select name="currency_to">
+                {% for currency in data %}
+                    <option value="{{ currency.currency_code }}">{{currency.country}}</option>
+            {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+          <div class="exchange-rate">{{ sum }} {{ cfrom }} -- {{ res }} {{ to }}</div>
+        <button>Get</button>
+      </form>
+    </div>
+{% endblock content %}
